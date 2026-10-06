@@ -1,0 +1,35 @@
+{
+  "name": "tharix-technologies",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tharix Technologies — corporate website. Engineering Digital Experiences for the Future.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "audit": "node scripts/audit.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.2.10",
+    "@fontsource-variable/plus-jakarta-sans": "^5.2.11",
+    "framer-motion": "^13.1.1",
+    "lucide-react": "^1.38.0",
+    "next": "^16.3.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.4.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.4",
+    "playwright": "^1.62.1",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  }
+}

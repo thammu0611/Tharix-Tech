@@ -1,0 +1,514 @@
+@import "tailwindcss";
+
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource-variable/jetbrains-mono";
+
+/* Class-based dark mode, toggled on <html> by the theme script. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ══════════════════════════════════════════════════════════════
+   THARIX DESIGN TOKENS
+   Charcoal / off-white / soft grey, with electric blue used
+   strictly as a signal colour. Light is the base palette; the
+   dark palette is authored separately, not inverted.
+   ══════════════════════════════════════════════════════════════ */
+
+@theme {
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+
+  /* Raw brand ramps */
+  --color-ink-950: #08090b;
+  --color-ink-900: #0b0d10;
+  --color-ink-850: #111418;
+  --color-ink-800: #16191e;
+  --color-ink-700: #1e232a;
+  --color-ink-600: #2b323b;
+
+  --color-slate-500: #6b727d;
+  --color-slate-400: #878e99;
+  --color-slate-300: #a8aeb8;
+
+  --color-paper-50: #ffffff;
+  --color-paper-100: #fbfbfa;
+  --color-paper-200: #f4f4f3;
+  --color-paper-300: #eceded;
+
+  --color-accent-400: #5c93ff;
+  --color-accent-500: #2f6bff;
+  --color-accent-600: #0f4fe8;
+  --color-accent-700: #0b3fba;
+
+  /* Semantic tokens — resolved per theme in the :root blocks below */
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+
+  --breakpoint-xs: 26rem;
+  --breakpoint-3xl: 100rem;
+}
+
+/* ── Light ─────────────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+
+  --canvas: #f6f6f5;
+  --surface: #ffffff;
+  --raised: #fbfbfa;
+
+  --fg: #0b0d10;
+  --fg-muted: #555d68;
+  --fg-subtle: #8b929c;
+
+  --line: color-mix(in oklab, #0b0d10 11%, transparent);
+  --line-strong: color-mix(in oklab, #0b0d10 20%, transparent);
+
+  --accent: #0f4fe8;
+  --accent-hover: #0b3fba;
+  --accent-soft: color-mix(in oklab, #0f4fe8 9%, transparent);
+  --on-accent: #ffffff;
+
+  /* Liquid-glass material */
+  --glass-tint: color-mix(in oklab, #ffffff 68%, transparent);
+  --glass-tint-strong: color-mix(in oklab, #ffffff 82%, transparent);
+  --glass-border: color-mix(in oklab, #0b0d10 9%, transparent);
+  --glass-specular: color-mix(in oklab, #ffffff 92%, transparent);
+  --glass-shade: color-mix(in oklab, #0b0d10 6%, transparent);
+  --glass-shadow: 0 1px 2px rgb(11 13 16 / 0.04), 0 12px 34px -12px rgb(11 13 16 / 0.16);
+  --glass-blur: 18px;
+  --glass-saturate: 172%;
+
+  --grid-line: color-mix(in oklab, #0b0d10 6%, transparent);
+  --grid-tick: color-mix(in oklab, #0b0d10 16%, transparent);
+  --noise-opacity: 0.028;
+}
+
+/* ── Dark ──────────────────────────────────────────────────── */
+.dark {
+  color-scheme: dark;
+
+  --canvas: #0b0d10;
+  --surface: #111418;
+  --raised: #161a1f;
+
+  --fg: #eef0f2;
+  --fg-muted: #99a1ab;
+  --fg-subtle: #6f7883;
+
+  --line: color-mix(in oklab, #ffffff 11%, transparent);
+  --line-strong: color-mix(in oklab, #ffffff 20%, transparent);
+
+  --accent: #5c93ff;
+  --accent-hover: #85adff;
+  --accent-soft: color-mix(in oklab, #5c93ff 14%, transparent);
+  --on-accent: #06121f;
+
+  --glass-tint: color-mix(in oklab, #171b21 62%, transparent);
+  --glass-tint-strong: color-mix(in oklab, #171b21 80%, transparent);
+  --glass-border: color-mix(in oklab, #ffffff 12%, transparent);
+  --glass-specular: color-mix(in oklab, #ffffff 26%, transparent);
+  --glass-shade: color-mix(in oklab, #000000 30%, transparent);
+  --glass-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 16px 40px -14px rgb(0 0 0 / 0.7);
+  --glass-blur: 20px;
+  --glass-saturate: 150%;
+
+  --grid-line: color-mix(in oklab, #ffffff 5.5%, transparent);
+  --grid-tick: color-mix(in oklab, #ffffff 15%, transparent);
+  --noise-opacity: 0.035;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BASE
+   ══════════════════════════════════════════════════════════════ */
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01" 1, "cv05" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Hide the focus ring for pointer users only; keyboard keeps it. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  /* Native select arrow removal — replaced with a custom chevron. */
+  select {
+    appearance: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border-radius: 999px;
+    border: 3px solid var(--canvas);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TYPOGRAPHY SCALE
+   Editorial display sizing, fluid between 320px and 1600px.
+   ══════════════════════════════════════════════════════════════ */
+
+@utility display-hero {
+  font-size: clamp(2.5rem, 1.3rem + 4.4vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.038em;
+  font-weight: 700;
+}
+
+@utility display-section {
+  font-size: clamp(2rem, 1.1rem + 3.6vw, 3.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.032em;
+  font-weight: 700;
+}
+
+@utility display-sub {
+  font-size: clamp(1.5rem, 1.05rem + 1.7vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.026em;
+  font-weight: 700;
+}
+
+@utility lead {
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  line-height: 1.62;
+  color: var(--fg-muted);
+}
+
+@utility micro-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LIQUID GLASS MATERIAL
+   A layered material, not a blur filter: a tinted body, a
+   refractive specular rim, and a soft grounding shadow.
+   ══════════════════════════════════════════════════════════════ */
+
+@utility glass {
+  position: relative;
+  background: var(--glass-tint);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  isolation: isolate;
+}
+
+@utility glass-strong {
+  background: var(--glass-tint-strong);
+}
+
+/* Specular rim: bright along the top-left, shaded bottom-right.
+   This is what reads as "liquid" rather than "frosted". */
+@utility glass-rim {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      145deg,
+      var(--glass-specular) 0%,
+      transparent 38%,
+      transparent 62%,
+      var(--glass-shade) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* Pointer-tracked specular bloom. Driven by --mx/--my set in JS. */
+@utility glass-specular-track {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      170px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in oklab, var(--accent) 22%, transparent),
+      transparent 62%
+    );
+    opacity: 0;
+    transition: opacity 420ms var(--ease-out-expo);
+    pointer-events: none;
+    z-index: 0;
+  }
+  &:hover::after,
+  &:focus-within::after {
+    opacity: 1;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BLUEPRINT GRID — the recurring structural motif
+   ══════════════════════════════════════════════════════════════ */
+
+@utility blueprint {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+@utility blueprint-fine {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Crosshair tick used at grid intersections and section corners. */
+@utility tick {
+  position: relative;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background: var(--grid-tick);
+  }
+  &::before {
+    left: 50%;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+  &::after {
+    top: 50%;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    transform: translateY(-50%);
+  }
+}
+
+@utility hairline {
+  border-top: 1px solid var(--line);
+}
+
+/* Subtle film grain, keeps large flat areas from banding. */
+@utility grain {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: var(--noise-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   INTERACTION PRIMITIVES
+   ══════════════════════════════════════════════════════════════ */
+
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 380ms var(--ease-out-expo);
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+@utility arrow-shift {
+  & svg {
+    transition: transform 340ms var(--ease-out-expo);
+  }
+  &:hover svg,
+  &:focus-visible svg {
+    transform: translateX(4px);
+  }
+}
+
+/* Row-style hover used on the services matrix and industry grid —
+   an accent wash that wipes in from the left, no card required. */
+@utility row-wash {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--accent-soft);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 480ms var(--ease-out-expo);
+  }
+  &:hover::before,
+  &:focus-within::before {
+    transform: scaleY(1);
+  }
+}
+
+@utility marquee-track {
+  animation: tharix-marquee 46s linear infinite;
+}
+
+@keyframes tharix-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes tharix-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes tharix-dash {
+  to {
+    stroke-dashoffset: -320;
+  }
+}
+
+@keyframes tharix-sheen {
+  from {
+    transform: translateX(-120%) skewX(-14deg);
+  }
+  to {
+    transform: translateX(320%) skewX(-14deg);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ACCESSIBILITY — reduced motion is honoured globally
+   ══════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Progressive enhancement: if backdrop-filter is unsupported the
+   glass falls back to an opaque surface rather than transparency. */
+@supports not (backdrop-filter: blur(1px)) {
+  :root {
+    --glass-tint: var(--surface);
+    --glass-tint-strong: var(--surface);
+  }
+  .dark {
+    --glass-tint: var(--surface);
+    --glass-tint-strong: var(--surface);
+  }
+}
+
+/* Prevent the flash of unstyled theme before hydration. */
+html.theme-loading * {
+  transition: none !important;
+}
